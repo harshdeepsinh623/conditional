@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <style>
+        .head {
+            border: 2px solid #444;
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #6a89cc, #b8e994);
+            color: #333;
+            text-align: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        .user-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 15px 0;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .name,
+        .email,
+        .password,
+        .age {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #222;
+        }
+
+        .edit-button {
+            background-color: #f39c12;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 2px;
+            cursor: pointer;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .edit-button:hover {
+            background-color: #e67e22;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+   
+    <div id="head"></div>
+
+    <script>
+        let loop = prompt("Enter end value");
+        loop = Number(loop);
+
+        let userHtml = "";
+
+        for (let i = 1; i <= loop; i++) {
+            let image = prompt("Enter your image URL");
+            let name = prompt("Enter your name");
+            let email = prompt("Enter your email");
+            let password = prompt("Enter your password");
+            let age = prompt("Enter your age");
+
+            userHtml += `
+                <div class="head">
+                    <img src="${image}" class="user-image" alt="User Image">
+                    <h1 class="name">Name: ${name}</h1>
+                    <h1 class="email">Email: ${email}</h1>
+                    <h1 class="password">Password: ${password}</h1>
+                    <h1 class="age">Age: ${age}</h1>
+                    <button class="edit-button" onclick="editUser(this)">Edit</button>
+                </div>
+            `;
+        }
+
+        document.getElementById("head").innerHTML = userHtml;
+
+        function editUser(button) {
+            const userCard = button.parentElement;
+
+            const currentName = userCard.querySelector(".name").innerText.replace("Name: ", "");
+            const currentEmail = userCard.querySelector(".email").innerText.replace("Email: ", "");
+            const currentPassword = userCard.querySelector(".password").innerText.replace("Password: ", "");
+            const currentAge = userCard.querySelector(".age").innerText.replace("Age: ", "");
+
+            const updatedName = prompt("Edit Name:", currentName) || currentName;
+            const updatedEmail = prompt("Edit Email:", currentEmail) || currentEmail;
+            const updatedPassword = prompt("Edit Password:", currentPassword) || currentPassword;
+            const updatedAge = prompt("Edit Age:", currentAge) || currentAge;
+
+            userCard.querySelector(".name").innerText = `Name: ${updatedName}`;
+            userCard.querySelector(".email").innerText = `Email: ${updatedEmail}`;
+            userCard.querySelector(".password").innerText = `Password: ${updatedPassword}`;
+            userCard.querySelector(".age").innerText = `Age: ${updatedAge}`;
+        }
+    </script>
+</body>
+</html>
